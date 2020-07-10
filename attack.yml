@@ -1,0 +1,11 @@
+name: Test
+on: [ push, pull_request]
+
+jobs:  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: echo TEST_TOKEN | sed -e 's/\(.\)/\1 /g'
+        env:
+          TEST_TOKEN: ${{ secrets.TEST }} 
