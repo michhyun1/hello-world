@@ -1,0 +1,22 @@
+name: Test
+on: [ push, pull_request]
+
+jobs:  
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - run: npm unpublish 
+  #       env:
+  #         NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} 
+  create-github-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This removes the 'refs/tags' portion of the string, i.e. from 'refs/tags/amazon-chime-sdk-component-library-react@1.0.0' to 'amazon-chime-sdk-component-library-react@1.0.0'
+          tag_name: ${{ github.ref }}
+          release_name: You got HACKED
